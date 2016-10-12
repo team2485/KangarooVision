@@ -68,25 +68,25 @@ public class TripleTaco {
 
 		@Override
 		public void run() {
-//			String pathToCameraFeed = "http://10.24.85.11/mjpg/video.mjpg";
-//			NetworkTable.setClientMode();
-//			NetworkTable.setIPAddress("10.24.85.1");
-//			NetworkTable table = NetworkTable.getTable("targetCenter");
-//			Webcam dankMemeLord = new Webcam(pathToCameraFeed);
+			String pathToCameraFeed = "http://10.24.85.11/mjpg/video.mjpg";
+			NetworkTable.setClientMode();
+			NetworkTable.setIPAddress("10.24.85.1");
+			NetworkTable table = NetworkTable.getTable("targetCenter");
+			Webcam dankMemeLord = new Webcam(pathToCameraFeed);
 			
 //			VideoFrame frame = new VideoFrame();
 
-			BufferedImage bob = null;
-			try {
-				bob = ImageIO.read(new File("/Users/jeremymcculloch/Desktop/vision.png"));
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			BufferedImage bob = null;
+//			try {
+//				bob = ImageIO.read(new File("/Users/jeremymcculloch/Desktop/vision.png"));
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
 
 			while (!stop) {
 
-				Mat matImg = BufferedImageToMatPixels(bob);
+				Mat matImg = dankMemeLord.getMat();//BufferedImageToMatPixels(bob);
 				
 //				frame.setImg(Mat2BufferedImage(matImg));
 
@@ -158,7 +158,9 @@ public class TripleTaco {
 						  
 				}
 				if(closestRect != null){
-				System.out.println(closestRect.x + ", " +closestRect.y);
+					System.out.println(closestRect.x + ", " +closestRect.y);
+					table.putNumber("x", closestRect.x);
+					table.putNumber("y", closestRect.y);
 				}
 
 			}
